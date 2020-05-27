@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.sportclub.data.SportClubContract.MemberEntry;
+
 public class AddMemberActivity extends AppCompatActivity {
     EditText lastNameEditText;
     EditText firstNameEditText;
@@ -40,15 +42,16 @@ public class AddMemberActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedGender = (String) parent.getItemAtPosition(position);
                 switch (selectedGender){
-                    case "Male": gender = 1;
-                    case "Female": gender = 2;
-                    default: gender = 0;
+                    case "Male": gender = MemberEntry.GENDER_MALE; break;
+                    case "Female": gender = MemberEntry.GENDER_FEMALE; break;
+                    default: gender = MemberEntry.GENDER_UNKNOWN;
+
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                gender = 0;
+                gender = MemberEntry.GENDER_UNKNOWN;
             }
         });
 
