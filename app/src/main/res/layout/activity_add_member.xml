@@ -66,19 +66,19 @@
         android:layout_marginTop="47dp"/>
 
     <TextView
-        android:id="@+id/adding_new_member_group_text_view"
+        android:id="@+id/adding_new_member_sport_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Group"
+        android:text="Sport"
         app:layout_constraintStart_toStartOf="@+id/adding_new_member_gender_text_view"
         app:layout_constraintTop_toBottomOf="@+id/adding_new_member_gender_text_view"
         android:layout_marginTop="60dp"/>
 
     <EditText
-        android:id="@+id/adding_new_member_group_edit_text"
+        android:id="@+id/adding_new_member_sport_edit_text"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:hint="Group"
+        android:hint="Sport"
         app:layout_constraintStart_toEndOf="@+id/adding_new_member_first_name_text_view"
         app:layout_constraintTop_toBottomOf="@id/adding_new_member_gender_spinner"
         android:layout_marginLeft="50dp"

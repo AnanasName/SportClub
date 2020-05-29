@@ -11,3 +11,5 @@ P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 z
 Japp/src/main/java/com/example/sportclub/data/SportClubContentProvider.java,7\e\7e3f3a8b75b76021536c978e5e15d220af45c557
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0

@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +15,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.sportclub.data.SportClubContract.MemberEntry;
+
+import java.lang.reflect.Member;
 
 public class AddMemberActivity extends AppCompatActivity {
     EditText lastNameEditText;
     EditText firstNameEditText;
     Spinner genderSpinner;
-    EditText groupEditText;
+    EditText sportEditText;
     private int gender;
 
     @Override
@@ -30,7 +36,7 @@ public class AddMemberActivity extends AppCompatActivity {
 
         lastNameEditText = findViewById(R.id.adding_new_member_last_name_edit_text);
         firstNameEditText = findViewById(R.id.adding_new_member_first_name_edit_text);
-        groupEditText = findViewById(R.id.adding_new_member_group_edit_text);
+        sportEditText = findViewById(R.id.adding_new_member_sport_edit_text);
         genderSpinner = findViewById(R.id.adding_new_member_gender_spinner);
 
         spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.array_gender, android.R.layout.simple_spinner_item);
@@ -67,6 +73,7 @@ public class AddMemberActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.save_member:
+                insertMethod();
                 return true;
             case R.id.delete_member:
                 return true;
@@ -75,5 +82,26 @@ public class AddMemberActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void insertMethod(){
+
+        String firstName = firstNameEditText.getText().toString().trim();
+        String lastName = lastNameEditText.getText().toString().trim();
+        String sport = sportEditText.getText().toString().trim();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MemberEntry.COLUMN_FIRST_NAME, firstName);
+        contentValues.put(MemberEntry.COLUMN_LAST_NAME, lastName);
+        contentValues.put(MemberEntry.COLUMN_SPORT, sport);
+        contentValues.put(MemberEntry.COLUMN_GENDER, gender);
+
+        ContentResolver contentResolver = getContentResolver();
+        Uri uri = contentResolver.insert(MemberEntry.CONTENT_URI, contentValues);
+
+        if (uri == null){
+            Toast.makeText(this, "Insertion of data failed", Toast.LENGTH_LONG).show();
+        }else
+            Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();
     }
 }
