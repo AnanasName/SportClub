@@ -1,7 +1,13 @@
 
 k
-java:S1128"IRemove this unused import 'com.example.sportclub.data.SportClubContract'.(ÂÕ³Ùıÿÿÿÿ8å¹ûÓ¥.
-W
-java:S1128"5Remove this unused import 'java.lang.reflect.Member'.(ƒô¾‘ùÿÿÿÿ8É¤–Ô¥.
+java:S1128"IRemove this unused import 'com.example.sportclub.data.SportClubContract'.(ÂÕ³Ùıÿÿÿÿ8å¹ûÓ¥.
 H
-java:S1172!"+Remove this unused method parameter "view".(­İ¢ğ8‡¼ü£.
+java:S1172#"+Remove this unused method parameter "view".(­İ¢ğ8àÙ‚Ï¦.
+]	java:S1258"<This block of commented-out lines of code should be removed.(ÇŸ¤Öÿÿÿÿÿ8àÙ‚Ï¦.
+X	java:S125>"<This block of commented-out lines of code should be removed.(ú¼„ì8àÙ‚Ï¦.
+]	java:S125A"<This block of commented-out lines of code should be removed.(¹Š¤™şÿÿÿÿ8àÙ‚Ï¦.
+]	java:S125C"<This block of commented-out lines of code should be removed.(¡Ø¸ûÿÿÿÿ8àÙ‚Ï¦.
+X	java:S125H"<This block of commented-out lines of code should be removed.(Èşˆ8àÙ‚Ï¦.
+]	java:S125J"<This block of commented-out lines of code should be removed.(ô¸²¬şÿÿÿÿ8àÙ‚Ï¦.
+]	java:S125P"<This block of commented-out lines of code should be removed.(ÜñÅíüÿÿÿÿ8àÙ‚Ï¦.
+X	java:S125\"<This block of commented-out lines of code should be removed.(üÿÍ•8àÙ‚Ï¦.

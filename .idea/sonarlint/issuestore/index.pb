@@ -13,3 +13,7 @@ z
 Japp/src/main/java/com/example/sportclub/data/SportClubContentProvider.java,7\e\7e3f3a8b75b76021536c978e5e15d220af45c557
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+_
+/app/src/main/res/layout/activity_add_member.xml,b\c\bc3f1a3e2b61d76754d052d2c5338a5b86b3bcd6
+|
+Lapp/src/main/java/com/example/sportclub/displayData/MemberCursorAdapter.java,2\d\2d02426dd860e445e4a1fc8aca0d73a569912a23

@@ -1,33 +1,38 @@
 package com.example.sportclub;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ListView;
 
-import com.example.sportclub.data.SportClubContract;
 import com.example.sportclub.data.SportClubContract.MemberEntry;
+import com.example.sportclub.displayData.MemberCursorAdapter;
 
-import java.lang.reflect.Member;
 
-public class MainActivity extends AppCompatActivity {
-    TextView membersTextView;
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    ListView listView;
+    MemberCursorAdapter memberCursorAdapter;
+    public static final int MEMBER_LOADER = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        membersTextView = findViewById(R.id.main_members_text_view);
-    }
+        listView = (ListView) findViewById(R.id.main_list_view);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        displayData();
+        memberCursorAdapter = new MemberCursorAdapter(this, null, false);
+        listView.setAdapter(memberCursorAdapter);
+
+        getSupportLoaderManager().initLoader(MEMBER_LOADER, null, this);
     }
 
     public void toAddMemberActivity(View view) {
@@ -35,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void displayData() {
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
         String[] projection = {
                 MemberEntry._ID,
                 MemberEntry.COLUMN_FIRST_NAME,
@@ -43,36 +50,23 @@ public class MainActivity extends AppCompatActivity {
                 MemberEntry.COLUMN_GENDER,
                 MemberEntry.COLUMN_SPORT};
 
-        Cursor cursor = getContentResolver().
-                query(MemberEntry.CONTENT_URI, projection, null, null ,null);
+        CursorLoader cursorLoader = new CursorLoader(this, MemberEntry.CONTENT_URI, projection,
+                null, null, null);
 
-        membersTextView.setText("All members\n\n");
-        membersTextView.append(MemberEntry._ID + " " +
-                    MemberEntry.COLUMN_FIRST_NAME + " " +
-                    MemberEntry.COLUMN_LAST_NAME + " " +
-                    MemberEntry.COLUMN_GENDER + " " +
-                    MemberEntry.COLUMN_SPORT);
+        return cursorLoader;
+    }
 
-        int idIndex = cursor.getColumnIndex(MemberEntry._ID);
-        int idFirstName = cursor.getColumnIndex(MemberEntry.COLUMN_FIRST_NAME);
-        int idLastName = cursor.getColumnIndex(MemberEntry.COLUMN_LAST_NAME);
-        int idGender = cursor.getColumnIndex(MemberEntry.COLUMN_GENDER);
-        int idSport = cursor.getColumnIndex(MemberEntry.COLUMN_SPORT);
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
 
-        while(cursor.moveToNext()){
-            int currentId = cursor.getInt(idIndex);
-            String currentFirstName = cursor.getString(idFirstName);
-            String currentLastName = cursor.getString(idLastName);
-            Integer currentGender = cursor.getInt(idGender);
-            String currentSport = cursor.getString(idSport);
+        memberCursorAdapter.swapCursor(data);
 
-            membersTextView.append("\n" +
-                    currentId + " " +
-                    currentFirstName + " " +
-                    currentLastName + " " +
-                    currentGender + " " +
-                    currentSport);
-        }
-        cursor.close();
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+
+        memberCursorAdapter.swapCursor(null);
+
     }
 }
